@@ -7,15 +7,15 @@ st.set_page_config(layout="wide")
 #this caches the data so each interaction doesnt require reloading the data set
 @st.cache
 def load_data():
-    df = pd.read_csv('https://github.com/es42289/DeclineCurveAnalysis/blob/4163e378dbdf2689d684f077a2e45ac98465f1d8/MB_latest_prd%20Producing%20Entity%20Monthly%20Production.CSV')
+    df = pd.read_csv('https://github.com/es42289/DeclineCurveAnalysis/raw/master/MB_latest_prd%20Producing%20Entity%20Monthly%20Production.CSV')
     return df
 @st.cache(allow_output_mutation=True)
 def load_data2():
-	df_params=pd.read_csv('https://github.com/es42289/DeclineCurveAnalysis/blob/4163e378dbdf2689d684f077a2e45ac98465f1d8/MB_DCA_parameters_per_Well.csv')
+	df_params=pd.read_csv('https://raw.githubusercontent.com/es42289/DeclineCurveAnalysis/master/MB_DCA_parameters_per_Well.csv')
 	return df_params
 @st.cache(allow_output_mutation=True)
 def load_data3():
-	df_headers=pd.read_csv('https://github.com/es42289/DeclineCurveAnalysis/blob/4163e378dbdf2689d684f077a2e45ac98465f1d8/MB_latest_prd%20Production%20Headers.CSV')
+	df_headers=pd.read_csv('https://github.com/es42289/DeclineCurveAnalysis/raw/master/MB_latest_prd%20Production%20Headers.CSV')
 	return df_headers
 
 #This is Arps equation turned into a function
