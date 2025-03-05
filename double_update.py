@@ -5,15 +5,15 @@ from dateutil.relativedelta import relativedelta
 st.set_page_config(layout="wide")
 # st.image('Logo.png',width=500)
 #this caches the data so each interaction doesnt require reloading the data set
-@st.cache
+@st.cache_data
 def load_data():
     df = pd.read_csv('https://github.com/es42289/DeclineCurveAnalysis/raw/master/MB_latest_prd%20Producing%20Entity%20Monthly%20Production.CSV')
     return df
-@st.cache(allow_output_mutation=True)
+@st.cache_data
 def load_data2():
 	df_params=pd.read_csv('https://raw.githubusercontent.com/es42289/DeclineCurveAnalysis/master/MB_DCA_parameters_per_Well.csv')
 	return df_params
-@st.cache(allow_output_mutation=True)
+@st.cache_data
 def load_data3():
 	df_headers=pd.read_csv('https://github.com/es42289/DeclineCurveAnalysis/raw/master/MB_latest_prd%20Production%20Headers.CSV')
 	return df_headers
@@ -37,7 +37,7 @@ df_headers=load_data3()
 
 #The main program is within here
 def main(): 
-	page = st.sidebar.selectbox("Choose a page", ["Full Field", "Individual Wells","Field Map"])
+	page = st.sidebar.selectbox("Choose a page", [ "Individual Wells","Field Map"])#"Full Field",
 	if page == "Full Field":
 		#give a title to the page that is the well name
 		st.header('Full Field Production')
@@ -215,7 +215,8 @@ def main():
 		fig2.add_trace(go.Scatter(name='P50',x=df_dca['Date'],y=df_dca['Qcalc_50']))
 		fig2.add_trace(go.Scatter(name='P90',x=df_dca['Date'],y=df_dca['Qcalc_90']))
 		fig2.add_trace(go.Scatter(name='P10',x=df_dca['Date'],y=df_dca['Qcalc_10']))
-		
+		##reset columns
+		cols = st.columns(2)
 		cols[0].plotly_chart(fig)
 		cols[1].plotly_chart(fig2)
 		# cols[0].write(df_params)
